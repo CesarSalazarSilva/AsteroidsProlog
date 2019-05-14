@@ -218,3 +218,77 @@ mVelAst([[N,M,A,P,L,Seed],Px,Py,Angulo,_,Radio,Seed], NewVel,[[N,M,A,P,L,Seed],P
 mRadAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,_,Seed], NewRad,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,NewRad,Seed]).
 %Modifica Seed Asteroides
 mSeedAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_], NewSeed,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,NewSeed]).
+
+
+%TDA DISPARO
+
+%Representacion Disparo.
+%[Variables,Px,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed],
+%[[20,20,8,P,L,Seed],17,17,45,1,18,18,2,4]
+
+%SELECTOR DISPARO
+
+%Selector Variables
+sVarDis([Variables,_,_,_,_,_,_,_,_]).
+%Selector Variable N Disparo
+sVarNDis([[N,_,_,_,_,_],_,_,_,_,_,_],N).
+%Selector Variables M Disparo
+sVarMDis([[_,M,_,_,_,_],_,_,_,_,_,_],M).
+%Selector Variables A Disparo
+sVarADis([[_,_,A,_,_,_],_,_,_,_,_,_],A).
+%Selector Variables P Disparo
+sVarPDis([[_,_,_,P,_,_],_,_,_,_,_,_],P).
+%Selector Variables L Disparo
+sVarLDis([[_,_,_,_,L,_],_,_,_,_,_,_],L).
+%Selector Variables Seed Disparo
+sVarSeedDis([[_,_,_,_,_,Seed],_,_,_,_,_,_],Seed).
+
+%Selector Px Disparo
+sPxDis([_,Px,_,_,_,_,_,_,_],Px).
+%Selector Py Disparo
+sPyDis([_,_,Py,_,_,_,_,_,_],Py).
+%Selector Angulo Disparo
+sAngDis([_,_,_,Angulo,_,_,_,_,_],Angulo).
+%Selector Velocidad Disparo
+sVelDis([_,_,_,_,Velocidad,_,_,_,_],Velocidad).
+%Selector Pxf Disparo
+sPxfDis([_,_,_,_,_,PxF,_,_,_],Pxf).
+%Selector Pyf Disparo
+sPyfDis([_,_,_,_,_,_,PyF,_,_],PyF).
+%Selector Largo Disparo
+sLarDis([_,_,_,_,_,_,_,Largo,_],Largo).
+%Selector Seed Disparo
+sSeedDis([_,_,_,_,_,_,_,_,Seed],Seed).
+
+%MODIFICADORES DISPARO
+%Modifica A Disparo
+mADis([[N,M,_,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed],NewA,[[N,M,NewA,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed]).
+%Modifica Px Disparo
+mPxDis([[N,M,A,P,L,Seed],_,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed],NewPx,[[N,M,A,P,L,Seed],NewPx,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed]).
+%Modifica Py Disparo
+mPyDis([[N,M,A,P,L,Seed],Px,_,Angulo,Velocidad,PxF,PyF,Largo,Seed],NewPy,[[N,M,A,P,L,Seed],Px,NewPy,Angulo,Velocidad,PxF,PyF,Largo,Seed]).
+%Modifica Ang Disparo
+mAngDis([[N,M,A,P,L,Seed],Px,Py,_,Velocidad,PxF,PyF,Largo,Seed],NewAng,[[N,M,A,P,L,Seed],Px,Py,NewAng,Velocidad,PxF,PyF,Largo,Seed]).
+%Modifica Vel Disparo
+mVelDis([[N,M,A,P,L,Seed],Px,Py,Angulo,_,PxF,PyF,Largo,Seed],NewVel,[[N,M,A,P,L,Seed],Px,Py,Angulo,NewVel,PxF,PyF,Largo,Seed]).
+%Modifica PxF Disparo
+mPxFDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,_,PyF,Largo,Seed],NewPxF,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,NewPxF,PyF,Largo,Seed]).
+%Modifica PyF Disparo
+mPyFDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,_,Largo,Seed],NewPyF,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,NewPyF,Largo,Seed]).
+%Modifica Largo Disparo
+mLarDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,_,Seed],NewLar,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,NewLar,Seed]).
+%Modifica Seed Disparo
+mSeedDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,_],NewSeed,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,NewSeed]).
+
+
+
+
+
+%Fin TDAs
+
+
+%Relaciones Varias.
+
+
+
+
