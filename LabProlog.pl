@@ -168,9 +168,9 @@ mAngNav([[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, _], NewAng 
 %[[20,20,8,P,L,Seed],17,16,270,1,2,4]
 
 %Funcion de Pertenencia
-isAsteroide([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,Seed]):-
+isAsteroide([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,SeedA]):-
 	number(N),number(M),number(A),number(L),integer(P),integer(Seed),number(Px),integer(Radio),
-	number(Py),number(Velocidad),integer(SeedN),number(EstadodeJuego),number(Angulo),
+	number(Py),number(Velocidad),integer(SeedA),number(Angulo),
 	Px<M,Py<N.
 
 
@@ -229,19 +229,19 @@ mSeedAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_], NewSeed,[[N,M,A,P,L,
 %SELECTOR DISPARO
 
 %Selector Variables
-sVarDis([Variables,_,_,_,_,_,_,_,_]).
+sVarDis([Variables,_,_,_,_,_,_,_,_],Variables).
 %Selector Variable N Disparo
-sVarNDis([[N,_,_,_,_,_],_,_,_,_,_,_],N).
+sVarNDis([[N,_,_,_,_,_],_,_,_,_,_,_,_,_],N).
 %Selector Variables M Disparo
-sVarMDis([[_,M,_,_,_,_],_,_,_,_,_,_],M).
+sVarMDis([[_,M,_,_,_,_],_,_,_,_,_,_,_,_],M).
 %Selector Variables A Disparo
-sVarADis([[_,_,A,_,_,_],_,_,_,_,_,_],A).
+sVarADis([[_,_,A,_,_,_],_,_,_,_,_,_,_,_],A).
 %Selector Variables P Disparo
-sVarPDis([[_,_,_,P,_,_],_,_,_,_,_,_],P).
+sVarPDis([[_,_,_,P,_,_],_,_,_,_,_,_,_,_],P).
 %Selector Variables L Disparo
-sVarLDis([[_,_,_,_,L,_],_,_,_,_,_,_],L).
+sVarLDis([[_,_,_,_,L,_],_,_,_,_,_,_,_,_],L).
 %Selector Variables Seed Disparo
-sVarSeedDis([[_,_,_,_,_,Seed],_,_,_,_,_,_],Seed).
+sVarSeedDis([[_,_,_,_,_,Seed],_,_,_,_,_,_,_,_],Seed).
 
 %Selector Px Disparo
 sPxDis([_,Px,_,_,_,_,_,_,_],Px).
@@ -252,7 +252,7 @@ sAngDis([_,_,_,Angulo,_,_,_,_,_],Angulo).
 %Selector Velocidad Disparo
 sVelDis([_,_,_,_,Velocidad,_,_,_,_],Velocidad).
 %Selector Pxf Disparo
-sPxfDis([_,_,_,_,_,PxF,_,_,_],Pxf).
+sPxfDis([_,_,_,_,_,PxF,_,_,_],PxF).
 %Selector Pyf Disparo
 sPyfDis([_,_,_,_,_,_,PyF,_,_],PyF).
 %Selector Largo Disparo
@@ -288,7 +288,3 @@ mSeedDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,_],NewSeed,[[N,M
 
 
 %Relaciones Varias.
-
-
-
-
