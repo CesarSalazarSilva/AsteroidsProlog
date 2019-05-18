@@ -5,60 +5,70 @@
 
 %Space 5x10 (2, 4 y 5 asteroides)
 % 2 Asteroides
+%                                                [[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,Seed]
+%                                        [ [[5,10,4,P,L,Seed],9,4,90,1,2,4] , [[5,10,4,P,L,Seed],7,0,270,1,2,4] , [[5,10,4,P,L,Seed],2,0,180,1,2,4] , [[5,10,4,P,L,Seed],1,4,90,1,2,4] ]
 createSpace(5,10,2,P,L,Seed,Space):-
-	Space = [[5,10,2,P,L,Seed],[[5,10,2,P,L,Seed],5,2,1,4,1,0],
-								[[[5,10,2,P,L,Seed],1,3,90,1,2,4],
-								 [[5,10,2,P,L,Seed],8,4,270,1,2,4]],
-								[ ]].
+	Space = [[5,10,2,P,L,Seed] , 
+	[[5,10,2,P,L,Seed],5,2,1,4,1,0], 
+	[ 	[[5,10,2,P,L,Seed],1,3,90,1,2, Seed], 
+		[[5,10,2,P,L,Seed],8,4,270,1,2,Seed]],
+	[ ]].
 % 4 Asteroides
 createSpace(5,10,4,P,L,Seed,Space):-
-	Space = [[5,10,4,P,L,Seed],[[5,10,4,P,L,Seed],5,3,1,4,1,0],
-								[[[5,10,4,P,L,Seed],9,4,90,1,2,4],
-								 [[5,10,4,P,L,Seed],7,0,270,1,2,4],
-								 [[5,10,4,P,L,Seed],2,0,180,1,2,4],
-								 [[5,10,4,P,L,Seed],1,4,90,1,2,4]],
-								[ ]].
+	Space = [[5,10,4,P,L,Seed],
+	[[5,10,4,P,L,Seed],5,3,1,4,1,0],
+	[	[[5,10,4,P,L,Seed],9,4,90,1,2, Seed],
+		[[5,10,4,P,L,Seed],7,0,270,1,2,Seed],
+		[[5,10,4,P,L,Seed],2,0,180,1,2,Seed],
+		[[5,10,4,P,L,Seed],1,4,90,1,2, Seed]],
+	[ ]].
 % 5 Asteroides
 createSpace(5,10,5,P,L,Seed,Space):-
-	Space = [[5,10,5,P,L,Seed],[[5,10,5,P,L,Seed],5,3,1,4,1,0],
-								[[[5,10,5,P,L,Seed],8,4,225,1,1,4],
-								 [[5,10,5,P,L,Seed],6,1,180,1,1,4],
-								 [[5,10,5,P,L,Seed],2,1,42,1,1,4],
-								 [[5,10,5,P,L,Seed],9,1,95,1,1,4],
-								 [[5,10,5,P,L,Seed],1,4,340,1,1,4]],
-								[ ]].
+	Space = [[5,10,5,P,L,Seed],
+	[[5,10,5,P,L,Seed],5,3,1,4,1,0],
+	[	[[5,10,5,P,L,Seed],8,4,225,1,1,Seed],
+		[[5,10,5,P,L,Seed],6,1,180,1,1,Seed],
+		[[5,10,5,P,L,Seed],2,1,42,1,1, Seed],
+		[[5,10,5,P,L,Seed],9,1,95,1,1, Seed],
+		[[5,10,5,P,L,Seed],1,4,340,1,1,Seed]],
+	[ ]].
 
 %Space 10x12 (4 y 6 asteroides)
 % 4 Asteroides
 createSpace(10,12,4,P,L,Seed,Space):-
-	Space = [[10,12,4,P,L,Seed],[[10,12,4,P,L,Seed],6,5,1,4,1,0],
-								[[[10,12,4,P,L,Seed],9,8,245,1,2,4],
-								 [[10,12,4,P,L,Seed],10,2,170,1,2,4],
-								 [[10,12,4,P,L,Seed],3,8,330,1,2,4],
-								 [[10,12,4,P,L,Seed],3,2,80,1,2,4]],
-								[ ]].
+	Space = [[10,12,4,P,L,Seed],
+	[[10,12,4,P,L,Seed],6,5,1,4,1,0],
+	[	[[10,12,4,P,L,Seed],9,8,245,1,2, Seed],
+		[[10,12,4,P,L,Seed],10,2,170,1,2,Seed],
+		[[10,12,4,P,L,Seed],3,8,330,1,2, Seed],
+		[[10,12,4,P,L,Seed],3,2,80,1,2,  Seed]],
+	[ ]].
+
 % 6 Asteroides
 createSpace(10,12,6,P,L,Seed,Space):-
-	Space = [[10,12,6,P,L,Seed],[[10,12,6,P,L,Seed],6,5,1,4,1,0],
-								[[[10,12,6,P,L,Seed],1,3,90,1,2,4],
-								 [[10,12,6,P,L,Seed],1,9,180,1,2,4],
-								 [[10,12,6,P,L,Seed],6,9,270,1,2,4],
-								 [[10,12,6,P,L,Seed],11,9,360,1,2,4],
-								 [[10,12,6,P,L,Seed],11,3,45,1,2,4],
-								 [[10,12,6,P,L,Seed],6,1,225,1,2,4]],
-								[ ]].
+	Space = [[10,12,6,P,L,Seed],
+	[[10,12,6,P,L,Seed],6,5,1,4,1,0],
+	[	[[10,12,6,P,L,Seed],1,3,90,1,2,  Seed],
+		[[10,12,6,P,L,Seed],1,9,180,1,2, Seed],
+		[[10,12,6,P,L,Seed],6,9,270,1,2, Seed],
+		[[10,12,6,P,L,Seed],11,9,360,1,2,Seed],
+		[[10,12,6,P,L,Seed],11,3,45,1,2, Seed],
+		[[10,12,6,P,L,Seed],6,1,225,1,2, Seed]],
+		[ ]].
+
 %Space 20x20 (8 asteroides)
 createSpace(20,20,8,P,L,Seed,Space):-
-	Space = [[20,20,8,P,L,Seed],[[20,20,8,P,L,Seed],10,10,1,4,1,0],
-								[[[20,20,8,P,L,Seed],17,16,270,1,2,4],
-								 [[20,20,8,P,L,Seed],13,13,225,1,2,4],
-								 [[20,20,8,P,L,Seed],5,11,45,1,2,4],
-								 [[20,20,8,P,L,Seed],3,3,25,1,2,4],
-								 [[20,20,8,P,L,Seed],9,6,135,1,2,4],
-								 [[20,20,8,P,L,Seed],16,7,190,1,2,4],
-								 [[20,20,8,P,L,Seed],9,17,320,1,2,4],
-								 [[20,20,8,P,L,Seed],4,17,0,1,2,4]],
-								[ ]].
+	Space = [[20,20,8,P,L,Seed],
+	[[20,20,8,P,L,Seed],10,10,1,4,1,0],
+	[	[[20,20,8,P,L,Seed],17,16,270,1,2,Seed],
+		[[20,20,8,P,L,Seed],13,13,225,1,2,Seed],
+		[[20,20,8,P,L,Seed],5,11,45,1,2,  Seed],
+		[[20,20,8,P,L,Seed],3,3,25,1,2,   Seed],
+		[[20,20,8,P,L,Seed],9,6,135,1,2,  Seed],
+		[[20,20,8,P,L,Seed],16,7,190,1,2, Seed],
+		[[20,20,8,P,L,Seed],9,17,320,1,2, Seed],
+		[[20,20,8,P,L,Seed],4,17,0,1,2,   Seed]],
+	[ ]].
 
 %Funcion de Pertenencia Space.
 isSpace([[N,M,A,P,L,Seed],[[B,C,D,E,F,G],X,Y,_,_,_,_],Asteroides,_]):- 
@@ -105,6 +115,7 @@ mDisSpa([[N,M,A,P,L,Seed],Nave,Asteroides,_] ,NewDisp ,[[N,M,A,P,L,Seed],Nave,As
 %TDA NAVE
 
 %Representacion Nave.
+% [[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo]
 % [[Variables], px, py , velocidad, seed, EstadodeJuego, angulo]
 % [[5,10,4,P,L,Seed],5,3,1,4,1,0],
 
@@ -173,6 +184,8 @@ isAsteroide([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,SeedA]):-
 	number(Py),number(Velocidad),integer(SeedA),number(Angulo),
 	Px<M,Py<N.
 
+%CONSTRUCTOR ASTEROIDE
+
 
 %SELECTORES ASTEROIDE
 %Selector Variables
@@ -199,7 +212,7 @@ sAngAst([_,_,_,Angulo,_,_,_],Angulo).
 %Selector Velocidad Asteroide
 sVelAst([_,_,_,_,Velocidad,_,_],Velocidad).
 %Selector Radio Asteroide
-sRad([_,_,_,_,_,Radio,_],Radio).
+sRadAst([_,_,_,_,_,Radio,_],Radio).
 %Selector Seed Asteroide
 sSeedAst([_,_,_,_,_,_,Seed],Seed).
 
@@ -223,8 +236,11 @@ mSeedAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_], NewSeed,[[N,M,A,P,L,
 %TDA DISPARO
 
 %Representacion Disparo.
-%[Variables,Px,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed],
+%[Variables,Px,Py,Angulo,Velocidad,Largo,Seed],
 %[[20,20,8,P,L,Seed],17,17,45,1,18,18,2,4]
+
+%CONSTRUCTOR DISPARO
+
 
 %SELECTOR DISPARO
 
@@ -251,10 +267,6 @@ sPyDis([_,_,Py,_,_,_,_,_,_],Py).
 sAngDis([_,_,_,Angulo,_,_,_,_,_],Angulo).
 %Selector Velocidad Disparo
 sVelDis([_,_,_,_,Velocidad,_,_,_,_],Velocidad).
-%Selector Pxf Disparo
-sPxfDis([_,_,_,_,_,PxF,_,_,_],PxF).
-%Selector Pyf Disparo
-sPyfDis([_,_,_,_,_,_,PyF,_,_],PyF).
 %Selector Largo Disparo
 sLarDis([_,_,_,_,_,_,_,Largo,_],Largo).
 %Selector Seed Disparo
@@ -262,29 +274,561 @@ sSeedDis([_,_,_,_,_,_,_,_,Seed],Seed).
 
 %MODIFICADORES DISPARO
 %Modifica A Disparo
-mADis([[N,M,_,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed],NewA,[[N,M,NewA,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed]).
+mADis([[N,M,_,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,Seed],NewA,[[N,M,NewA,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,Seed]).
 %Modifica Px Disparo
-mPxDis([[N,M,A,P,L,Seed],_,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed],NewPx,[[N,M,A,P,L,Seed],NewPx,Py,Angulo,Velocidad,PxF,PyF,Largo,Seed]).
+mPxDis([[N,M,A,P,L,Seed],_,Py,Angulo,Velocidad,Largo,Seed],NewPx,[[N,M,A,P,L,Seed],NewPx,Py,Angulo,Velocidad,Largo,Seed]).
 %Modifica Py Disparo
-mPyDis([[N,M,A,P,L,Seed],Px,_,Angulo,Velocidad,PxF,PyF,Largo,Seed],NewPy,[[N,M,A,P,L,Seed],Px,NewPy,Angulo,Velocidad,PxF,PyF,Largo,Seed]).
+mPyDis([[N,M,A,P,L,Seed],Px,_,Angulo,Velocidad,Largo,Seed],NewPy,[[N,M,A,P,L,Seed],Px,NewPy,Angulo,Velocidad,Largo,Seed]).
 %Modifica Ang Disparo
-mAngDis([[N,M,A,P,L,Seed],Px,Py,_,Velocidad,PxF,PyF,Largo,Seed],NewAng,[[N,M,A,P,L,Seed],Px,Py,NewAng,Velocidad,PxF,PyF,Largo,Seed]).
+mAngDis([[N,M,A,P,L,Seed],Px,Py,_,Velocidad,Largo,Seed],NewAng,[[N,M,A,P,L,Seed],Px,Py,NewAng,Velocidad,Largo,Seed]).
 %Modifica Vel Disparo
-mVelDis([[N,M,A,P,L,Seed],Px,Py,Angulo,_,PxF,PyF,Largo,Seed],NewVel,[[N,M,A,P,L,Seed],Px,Py,Angulo,NewVel,PxF,PyF,Largo,Seed]).
-%Modifica PxF Disparo
-mPxFDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,_,PyF,Largo,Seed],NewPxF,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,NewPxF,PyF,Largo,Seed]).
-%Modifica PyF Disparo
-mPyFDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,_,Largo,Seed],NewPyF,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,NewPyF,Largo,Seed]).
+mVelDis([[N,M,A,P,L,Seed],Px,Py,Angulo,_,Largo,Seed],NewVel,[[N,M,A,P,L,Seed],Px,Py,Angulo,NewVel,Largo,Seed]).
 %Modifica Largo Disparo
-mLarDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,_,Seed],NewLar,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,NewLar,Seed]).
+mLarDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,_,Seed],NewLar,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,NewLar,Seed]).
 %Modifica Seed Disparo
-mSeedDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,_],NewSeed,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,PxF,PyF,Largo,NewSeed]).
-
-
-
-
+mSeedDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,_],NewSeed,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,NewSeed]).
 
 %Fin TDAs
 
 
 %Relaciones Varias.
+
+%Amplificador Rand
+datos(au,4).
+%Modulo Rand
+datos(mo,9).
+%Incremento Rand
+datos(co,1).
+%Tamano minimo Asteroide.
+datos(tmA,2.1).
+datos(amp15, 1.5).
+datos(amp25, 2.5).
+% Pi
+datos(pi,3.1415926535897932384626433832795028841).
+
+%Relacion Random
+random(Seed,NSeed):- 
+ 	datos(au,A),
+	datos(mo,M),
+	datos(co,C),
+	datos(lv,[ ]),
+	X is (A*Seed)+C,
+	NSeed is mod(X,M).
+
+
+%Relacion Convierte a un numero a radianes
+grad_Rad(Numero, Resultado):-
+	datos(pi,PI),
+	Resultado is (PI*Numero) / 180.
+
+%Relacion Verifica que dos elemetos han chocado 
+chocan(Objeto1x, Objeto1y, Radio1, Objeto2x, Objeto2y, Radio2):-
+	Suma1 is Objeto1x-Objeto2x,
+	Suma2 is Objeto1y-Objeto2y,
+	Pot1 is Suma1^2,
+	Pot2 is Suma2^2,
+	Res is Pot1 + Pot2,
+	Resultado is sqrt(Res),
+	Resultado < (Radio1 + Radio2).
+
+%Relacion que concatena lista
+concatenar([],L,L).
+concatenar([X|M],L,[X|Z]):- concatenar(M,L,Z).
+
+%Relacion Borra todos los "X" presentes en el arreglo.
+%elim_elem(a,[z,a,a,a,b,a,s,d],R).
+elim_elem(_, [], []). 
+elim_elem(Y, [Y|Xs], Zs):- elim_elem(Y, Xs, Zs), !. 
+elim_elem(X, [Y|Xs], [Y|Zs]):- elim_elem(X, Xs, Zs).
+
+
+%Funcion Map.
+%Funciona con maplist(mapeo,list,Resultado)
+mapeo(Dato,DatoMapeado):- DatoMapeado is Dato + 1.
+
+
+%Mover Asteroides.
+movAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,SeedA],AstModificado):- 
+	grad_Rad(Angulo,AngGrad),
+	Npx is Px + Velocidad*cos(AngGrad),
+	Npy is Py + Velocidad*sin(AngGrad),
+	Rpx is integer(Npx),
+	Rpy is integer(Npy),
+	RPx is mod(Rpx,M),
+	RPy is mod(Rpy,N),
+	AstModificado = [[N,M,A,P,L,Seed],RPx,RPy,Angulo,Velocidad,Radio,SeedA].
+
+modificarAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_],AstModificado):- 
+	NewSeed is Seed*Seed + 5*Seed,
+	NewAngulo is Angulo + random(NewSeed),
+	NewVelocidad is Velocidad + random(NewSeed),
+	AstModificado = [[N,M,A,P,L,Seed],Px,Py,NewAngulo,NewVelocidad,Radio,NewSeed].
+
+%Mover Disparos.
+%Caso Largo > 0
+movDisp([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,SeedD],DispModificado):-
+	Largo > 0,
+	grad_Rad(Angulo,AngGrad),
+	Npx is Px + Velocidad*cos(AngGrad),
+	Npy is Py + Velocidad*sin(AngGrad),
+	Rpx is integer(Npx),
+	Rpy is integer(Npy),
+	RPx is mod(Rpx,M),
+	RPy is mod(Rpy,N),
+	NewLargo = Largo - Velocidad,
+	DispModificado = [[N,M,A,P,L,Seed],RPx,RPy,Angulo,Velocidad,NewLargo,SeedD].
+
+%Caso Largo < 0
+movDisp([[_,_,_,_,_,_],_,_,_,_,Largo,_],DispModificado):-
+	Largo =< 0,
+	DispModificado = 0.
+
+%Movimiento simple de la nave, sin modificar angulo o velocidad.
+%Condicion velocidad mayor a 0.
+moShip([[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo],NaveMovida):-
+	Velocidad>0,
+	grad_Rad(Angulo,AngGrad),
+	Npx is Px + Velocidad*cos(AngGrad),
+	Npy is Py + Velocidad*sin(AngGrad),
+	Rpx is integer(Npx),
+	Rpy is integer(Npy),
+	RPx is mod(Rpx,M),
+	RPy is mod(Rpy,N),
+	NuevaVel is Velocidad - 1,
+	NaveMovida = [[N,M,A,P,L,Seed], RPx, RPy , NuevaVel, SeedN, EstadodeJuego, Angulo].
+
+
+%Condicion velocidad menor igual a 0.
+moShip([[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo],NaveMovida):-
+	Velocidad=<0,
+	NaveMovida = [[N,M,A,P,L,Seed], Px, Py , 0, SeedN, EstadodeJuego, Angulo].
+
+%Verifica si un asteroide colisiona con alguno en una lista de Asteroides
+choque_Ast_ListaAst(_,[]):- false.
+choque_Ast_ListaAst([[N,M,A,P,L,Seed],Px1,Py1,Angulo1,Velocidad1,Radio1,Seed1],[[_,Px2,Py2,_,_,Radio2,_]|Cola]):- 
+	chocan(Px1, Py1, Radio1, Px2, Py2, Radio2),!; 
+	choque_Ast_ListaAst([[N,M,A,P,L,Seed],Px1,Py1,Angulo1,Velocidad1,Radio1,Seed1],Cola).
+
+%Agregar un elemento a una lista.
+agregar(X,List,[X|List]).
+
+%Remover Elem X de una lista.
+removerElem(X, [X|Xs], Xs). 
+removerElem(X, [Y|Ys], [Y|Zs]):- removerElem(X, Ys, Zs).
+
+
+
+%Algorimo que separa Aasteroides que Chocan y no Chocan.
+%Para los que chocan.
+ch_Ast_Ast([CabR|ColaR],Original,Choca,NoChoca,Resultado):-
+	removerElem(CabR,Original,OriginalSinCabR),
+	choque_Ast_ListaAst(CabR,OriginalSinCabR),
+	modificarAst(CabR,R),
+	agregar(R,Choca,NewChoca),
+	ch_Ast_Ast(ColaR,Original,NewChoca,NoChoca,Resultado).
+
+%Para los que no chocan.
+ch_Ast_Ast([CabR|ColaR],Original,Choca,NoChoca,Resultado):-
+	removerElem(CabR,Original,OriginalSinCabR),
+	not(choque_Ast_ListaAst(CabR,OriginalSinCabR)),
+	agregar(CabR,NoChoca,NewNoChoca),
+	ch_Ast_Ast(ColaR,Original,Choca,NewNoChoca,Resultado).
+
+%Caso Final lista Vacia.
+ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
+	agregar(Choca,NoChoca,Resultado).
+
+
+
+
+
+
+
+%moveShip(Space angulo velocidad seed).
+%Necesita:
+%			-ComparacionNave
+
+%moveAsteroide(Asteroide Angulo Velocidad).
+%Necesita Solo Selectores y Modificadoes
+%	tiene llamado Simplificado
+
+%moveDisparo(disparo angulo velocidad)
+%	tiene llamado Simplificado
+
+%Shoot (Space Constante)
+%Necesita:
+%		-ComparacionNave
+%		-UpdateSpace
+%		-Mover todos los disparos
+
+%ComparacionNave(listaAsteroides Nave radio)
+%Verifica que Nave choque con una lista de asteroides
+% Compara si intesectanave con asteroides en una lista de asteoides
+% Choque?
+
+%97 Verifica que disparo choque con asteroide
+%eliminar_disparo_lista (listaAsteroides disparo)
+%choque
+
+%Identifica_Asteroide (ListaAsteroides Disparo) (entrega Asteroide)
+%Choque?
+
+%ChoqueDisparos_Asteroides (Space Asteroides Disparos NuevosAsteroides disparosnochocados )
+%Entrega un Space Con coliciones hechas 
+% tiene llamado Simplificado
+
+%AsteroideChoca(asteroides asteroide)
+%Booleano
+
+%EliminaAsteroidequeChoca( asteroides asteroide)
+
+%ModificaTrayectoria(asteroides asteroide) asteroides que colicionan
+%Tiene llamado Simplificado
+
+%Choque
+%Entrega si choca o no.
+
+
+%UpdateSpace(Space Seed).
+%mueve el tablero a un t+1
+updateSpace(Space,[4|Space]).
+
+
+
+
+
+
+
+
+%Relacion Fisica de Asteroides.
+%fisicaDeAsteroides(Asteroide,ValorRandom,Tamano,Asteroides)
+fisicaDeAsteroides(_,_,Tamano,[]):-
+	datos(tmA,TmA),
+	Tamano < TmA.
+	%[Variables,Px,Py,Angulo,Velocidad,Radio,Seed]
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],1,_,Resultado):-
+	NA is A + 6,
+	NewRadio is div(Rad,2) ,
+
+	Newpx1 is Px,
+
+	NewPx1 is integer(Newpx1),
+
+	PxR1 is mod(NewPx1,M),
+
+	Newpy1 is Py,
+
+	NewPy1 is integer(Newpy1),
+	
+	PyR1 is mod(NewPy1,N),
+
+	NewAngulo1 is Angulo,
+
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed]
+				].
+
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],2,_,Resultado):-
+	datos(amp15,Amp15),
+	NA is A + 6,
+	NewRadio is div(Rad,2) ,
+
+	Newpx1 is Px,
+	Newpx2 is Px + 2*NewRadio,
+
+	NewPx1 is integer(Newpx1),
+	NewPx2 is integer(Newpx2),
+
+	PxR1 is mod(NewPx1,M),
+	PxR2 is mod(NewPx2,M),
+
+	Newpy1 is Py,
+	Newpy2 is Py +  Amp15*NewRadio,
+
+	NewPy1 is integer(Newpy1),
+	NewPy2 is integer(Newpy2),
+	
+	PyR1 is mod(NewPy1,N),
+	PyR2 is mod(NewPy2,N),
+
+	NewAngulo1 is Angulo,
+	NewAngulo2 is Angulo + 45,
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR2,PyR2,NewAngulo2,Velocidad,NewRadio,Seed]
+				].
+	
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],3,_,Resultado):-
+	datos(amp15,Amp15),
+	NA is A + 6,
+	NewRadio is div(Rad,2),
+
+	Newpx1 is Px,
+	Newpx2 is Px + 2*NewRadio,
+	Newpx3 is Px - 2*NewRadio,
+
+	NewPx1 is integer(Newpx1),
+	NewPx2 is integer(Newpx2),
+	NewPx3 is integer(Newpx3),
+
+	PxR1 is mod(NewPx1,M),
+	PxR2 is mod(NewPx2,M),
+	PxR3 is mod(NewPx3,M),
+
+	Newpy1 is Py,
+	Newpy2 is Py +  Amp15*NewRadio,
+	Newpy3 is Py +  Amp15*NewRadio,
+
+	NewPy1 is integer(Newpy1),
+	NewPy2 is integer(Newpy2),
+	NewPy3 is integer(Newpy3),
+	
+	PyR1 is mod(NewPy1,N),
+	PyR2 is mod(NewPy2,N),
+	PyR3 is mod(NewPy3,N),
+
+	NewAngulo1 is Angulo,
+	NewAngulo2 is Angulo + 45,
+	NewAngulo3 is Angulo + 135,
+
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR2,PyR2,NewAngulo2,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR3,PyR3,NewAngulo3,Velocidad,NewRadio,Seed]
+				].
+
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],4,_,Resultado):-
+	datos(amp15,Amp15),
+
+	NA is A + 6,
+	NewRadio is div(Rad,2) ,
+
+	Newpx1 is Px,
+	Newpx2 is Px + 2*NewRadio,
+	Newpx3 is Px - 2*NewRadio,
+	Newpx4 is Px + 2*NewRadio,
+
+	NewPx1 is integer(Newpx1),
+	NewPx2 is integer(Newpx2),
+	NewPx3 is integer(Newpx3),
+	NewPx4 is integer(Newpx4),
+
+	PxR1 is mod(NewPx1,M),
+	PxR2 is mod(NewPx2,M),
+	PxR3 is mod(NewPx3,M),
+	PxR4 is mod(NewPx4,M),
+
+
+	Newpy1 is Py,
+	Newpy2 is Py +  Amp15*NewRadio,
+	Newpy3 is Py +  Amp15*NewRadio,
+	Newpy4 is Py -  Amp15*NewRadio,
+
+	NewPy1 is integer(Newpy1),
+	NewPy2 is integer(Newpy2),
+	NewPy3 is integer(Newpy3),
+	NewPy4 is integer(Newpy4),
+	
+	PyR1 is mod(NewPy1,N),
+	PyR2 is mod(NewPy2,N),
+	PyR3 is mod(NewPy3,N),
+	PyR4 is mod(NewPy4,N),
+
+	NewAngulo1 is Angulo,
+	NewAngulo2 is Angulo + 45,
+	NewAngulo3 is Angulo + 135,
+	NewAngulo4 is Angulo + 315,
+
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR2,PyR2,NewAngulo2,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR3,PyR3,NewAngulo3,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR4,PyR4,NewAngulo4,Velocidad,NewRadio,Seed]
+				].
+
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],5,_,Resultado):-
+	datos(amp15,Amp15),
+
+	NA is A + 6,
+	NewRadio is div(Rad,2) ,
+
+	Newpx1 is Px,
+	Newpx2 is Px + 2*NewRadio,
+	Newpx3 is Px - 2*NewRadio,
+	Newpx4 is Px + 2*NewRadio,
+	Newpx5 is Px - 2*NewRadio,
+
+	NewPx1 is integer(Newpx1),
+	NewPx2 is integer(Newpx2),
+	NewPx3 is integer(Newpx3),
+	NewPx4 is integer(Newpx4),
+	NewPx5 is integer(Newpx5),
+
+	PxR1 is mod(NewPx1,M),
+	PxR2 is mod(NewPx2,M),
+	PxR3 is mod(NewPx3,M),
+	PxR4 is mod(NewPx4,M),
+	PxR5 is mod(NewPx5,M),
+
+	Newpy1 is Py,
+	Newpy2 is Py +  Amp15*NewRadio,
+	Newpy3 is Py +  Amp15*NewRadio,
+	Newpy4 is Py -  Amp15*NewRadio,
+	Newpy5 is Py -  Amp15*NewRadio,
+
+	NewPy1 is integer(Newpy1),
+	NewPy2 is integer(Newpy2),
+	NewPy3 is integer(Newpy3),
+	NewPy4 is integer(Newpy4),
+	NewPy5 is integer(Newpy5),
+
+	
+	PyR1 is mod(NewPy1,N),
+	PyR2 is mod(NewPy2,N),
+	PyR3 is mod(NewPy3,N),
+	PyR4 is mod(NewPy4,N),
+	PyR5 is mod(NewPy5,N),
+
+	NewAngulo1 is Angulo,
+	NewAngulo2 is Angulo + 45,
+	NewAngulo3 is Angulo + 135,
+	NewAngulo4 is Angulo + 315,
+	NewAngulo5 is Angulo + 225,
+
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR2,PyR2,NewAngulo2,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR3,PyR3,NewAngulo3,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR4,PyR4,NewAngulo4,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR5,PyR5,NewAngulo5,Velocidad,NewRadio,Seed]
+				].
+
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],6,_,Resultado):-
+	datos(amp15,Amp15),
+	datos(amp25,Amp25),
+	NA is A + 6,
+	NewRadio is div(Rad,2) ,
+
+	Newpx1 is Px,
+	Newpx2 is Px + 2*NewRadio,
+	Newpx3 is Px - 2*NewRadio,
+	Newpx4 is Px + 2*NewRadio,
+	Newpx5 is Px - 2*NewRadio,
+	Newpx6 is Px,
+
+	NewPx1 is integer(Newpx1),
+	NewPx2 is integer(Newpx2),
+	NewPx3 is integer(Newpx3),
+	NewPx4 is integer(Newpx4),
+	NewPx5 is integer(Newpx5),
+	NewPx6 is integer(Newpx6),
+
+	PxR1 is mod(NewPx1,M),
+	PxR2 is mod(NewPx2,M),
+	PxR3 is mod(NewPx3,M),
+	PxR4 is mod(NewPx4,M),
+	PxR5 is mod(NewPx5,M),
+	PxR6 is mod(NewPx6,M),
+
+
+	Newpy1 is Py,
+	Newpy2 is Py +  Amp15*NewRadio,
+	Newpy3 is Py +  Amp15*NewRadio,
+	Newpy4 is Py -  Amp15*NewRadio,
+	Newpy5 is Py -  Amp15*NewRadio,
+	Newpy6 is Py +  Amp25*NewRadio,
+
+	NewPy1 is integer(Newpy1),
+	NewPy2 is integer(Newpy2),
+	NewPy3 is integer(Newpy3),
+	NewPy4 is integer(Newpy4),
+	NewPy5 is integer(Newpy5),
+	NewPy6 is integer(Newpy6),
+	
+	PyR1 is mod(NewPy1,N),
+	PyR2 is mod(NewPy2,N),
+	PyR3 is mod(NewPy3,N),
+	PyR4 is mod(NewPy4,N),
+	PyR5 is mod(NewPy5,N),
+	PyR6 is mod(NewPy6,N),
+	
+	NewAngulo1 is Angulo,
+	NewAngulo2 is Angulo + 45,
+	NewAngulo3 is Angulo + 135,
+	NewAngulo4 is Angulo + 315,
+	NewAngulo5 is Angulo + 225,
+	NewAngulo6 is Angulo + 90,
+	
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR2,PyR2,NewAngulo2,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR3,PyR3,NewAngulo3,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR4,PyR4,NewAngulo4,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR5,PyR5,NewAngulo5,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR6,PyR6,NewAngulo6,Velocidad,NewRadio,Seed]
+				].
+
+fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],7,_,Resultado):-
+	datos(amp15,Amp15),
+	datos(amp25,Amp25),
+	NA is A + 6,
+	NewRadio is div(Rad,2) ,
+
+	Newpx1 is Px,
+	Newpx2 is Px + 2*NewRadio,
+	Newpx3 is Px - 2*NewRadio,
+	Newpx4 is Px + 2*NewRadio,
+	Newpx5 is Px - 2*NewRadio,
+	Newpx6 is Px,
+	Newpx7 is Px,
+
+	NewPx1 is integer(Newpx1),
+	NewPx2 is integer(Newpx2),
+	NewPx3 is integer(Newpx3),
+	NewPx4 is integer(Newpx4),
+	NewPx5 is integer(Newpx5),
+	NewPx6 is integer(Newpx6),
+	NewPx7 is integer(Newpx7),
+
+	PxR1 is mod(NewPx1,M),
+	PxR2 is mod(NewPx2,M),
+	PxR3 is mod(NewPx3,M),
+	PxR4 is mod(NewPx4,M),
+	PxR5 is mod(NewPx5,M),
+	PxR6 is mod(NewPx6,M),
+	PxR7 is mod(NewPx7,M),
+
+	Newpy1 is Py,
+	Newpy2 is Py +  Amp15*NewRadio,
+	Newpy3 is Py +  Amp15*NewRadio,
+	Newpy4 is Py -  Amp15*NewRadio,
+	Newpy5 is Py -  Amp15*NewRadio,
+	Newpy6 is Py +  Amp25*NewRadio,
+	Newpy7 is Py -  Amp25*NewRadio,
+
+	NewPy1 is integer(Newpy1),
+	NewPy2 is integer(Newpy2),
+	NewPy3 is integer(Newpy3),
+	NewPy4 is integer(Newpy4),
+	NewPy5 is integer(Newpy5),
+	NewPy6 is integer(Newpy6),
+	NewPy7 is integer(Newpy7),
+	
+	PyR1 is mod(NewPy1,N),
+	PyR2 is mod(NewPy2,N),
+	PyR3 is mod(NewPy3,N),
+	PyR4 is mod(NewPy4,N),
+	PyR5 is mod(NewPy5,N),
+	PyR6 is mod(NewPy6,N),
+	PyR7 is mod(NewPy7,N),
+
+	NewAngulo1 is Angulo,
+	NewAngulo2 is Angulo + 45,
+	NewAngulo3 is Angulo + 135,
+	NewAngulo4 is Angulo + 315,
+	NewAngulo5 is Angulo + 225,
+	NewAngulo6 is Angulo + 90,
+	NewAngulo7 is Angulo + 270,
+
+	Resultado =	[	[[N,M,NA,P,L,VarSeed],PxR1,PyR1,NewAngulo1,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR2,PyR2,NewAngulo2,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR3,PyR3,NewAngulo3,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR4,PyR4,NewAngulo4,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR5,PyR5,NewAngulo5,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR6,PyR6,NewAngulo6,Velocidad,NewRadio,Seed],
+					[[N,M,NA,P,L,VarSeed],PxR7,PyR7,NewAngulo7,Velocidad,NewRadio,Seed]
+				].
