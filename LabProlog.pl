@@ -78,6 +78,8 @@ isSpace([[N,M,A,P,L,Seed],[[B,C,D,E,F,G],X,Y,_,_,_,_],Asteroides,_]):-
 
 %SELECTORES SPACE.
 
+%Selector Variable Space.
+sVarSpace([Var,_,_,_],Var).
 %Selector VariableN-Space
 sVarNSpa([[N,_,_,_,_,_]|_],N).
 %Selector VariableM-Space
@@ -274,17 +276,17 @@ sSeedDis([_,_,_,_,_,_,_,_,Seed],Seed).
 
 %MODIFICADORES DISPARO
 %Modifica A Disparo
-mADis([[N,M,_,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,Seed],NewA,[[N,M,NewA,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,Seed]).
+mADis([[N,M,_,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,DSeed],NewA,[[N,M,NewA,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,DSeed]).
 %Modifica Px Disparo
-mPxDis([[N,M,A,P,L,Seed],_,Py,Angulo,Velocidad,Largo,Seed],NewPx,[[N,M,A,P,L,Seed],NewPx,Py,Angulo,Velocidad,Largo,Seed]).
+mPxDis([[N,M,A,P,L,Seed],_,Py,Angulo,Velocidad,Largo,DSeed],NewPx,[[N,M,A,P,L,Seed],NewPx,Py,Angulo,Velocidad,Largo,DSeed]).
 %Modifica Py Disparo
-mPyDis([[N,M,A,P,L,Seed],Px,_,Angulo,Velocidad,Largo,Seed],NewPy,[[N,M,A,P,L,Seed],Px,NewPy,Angulo,Velocidad,Largo,Seed]).
+mPyDis([[N,M,A,P,L,Seed],Px,_,Angulo,Velocidad,Largo,DSeed],NewPy,[[N,M,A,P,L,Seed],Px,NewPy,Angulo,Velocidad,Largo,DSeed]).
 %Modifica Ang Disparo
-mAngDis([[N,M,A,P,L,Seed],Px,Py,_,Velocidad,Largo,Seed],NewAng,[[N,M,A,P,L,Seed],Px,Py,NewAng,Velocidad,Largo,Seed]).
+mAngDis([[N,M,A,P,L,Seed],Px,Py,_,Velocidad,Largo,DSeed],NewAng,[[N,M,A,P,L,Seed],Px,Py,NewAng,Velocidad,Largo,DSeed]).
 %Modifica Vel Disparo
-mVelDis([[N,M,A,P,L,Seed],Px,Py,Angulo,_,Largo,Seed],NewVel,[[N,M,A,P,L,Seed],Px,Py,Angulo,NewVel,Largo,Seed]).
+mVelDis([[N,M,A,P,L,Seed],Px,Py,Angulo,_,Largo,DSeed],NewVel,[[N,M,A,P,L,Seed],Px,Py,Angulo,NewVel,Largo,DSeed]).
 %Modifica Largo Disparo
-mLarDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,_,Seed],NewLar,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,NewLar,Seed]).
+mLarDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,_,DSeed],NewLar,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,NewLar,DSeed]).
 %Modifica Seed Disparo
 mSeedDis([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,_],NewSeed,[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,NewSeed]).
 
@@ -375,7 +377,7 @@ movDisp([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,SeedD],DispModificado):-
 	Rpy is integer(Npy),
 	RPx is mod(Rpx,M),
 	RPy is mod(Rpy,N),
-	NewLargo = Largo - Velocidad,
+	NewLargo is Largo - Velocidad,
 	DispModificado = [[N,M,A,P,L,Seed],RPx,RPy,Angulo,Velocidad,NewLargo,SeedD].
 
 %Caso Largo < 0
@@ -405,9 +407,22 @@ moShip([[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo],Nave
 
 %Verifica si un asteroide colisiona con alguno en una lista de Asteroides
 choque_Ast_ListaAst(_,[]):- false.
-choque_Ast_ListaAst([[N,M,A,P,L,Seed],Px1,Py1,Angulo1,Velocidad1,Radio1,Seed1],[[_,Px2,Py2,_,_,Radio2,_]|Cola]):- 
-	chocan(Px1, Py1, Radio1, Px2, Py2, Radio2),!; 
-	choque_Ast_ListaAst([[N,M,A,P,L,Seed],Px1,Py1,Angulo1,Velocidad1,Radio1,Seed1],Cola).
+choque_Ast_ListaAst([_,Px1,Py1,Angulo1,Velocidad1,Radio1,Seed1],[[_,Px2,Py2,_,_,Radio2,_]|Cola]):- 
+	chocan(Px1, Py1, Radio1, Px2, Py2, Radio2); 
+	choque_Ast_ListaAst([_,Px1,Py1,Angulo1,Velocidad1,Radio1,Seed1],Cola).
+
+%Verifica si un Disparo Choca con una lista de Asteroides.
+choque_Disp_ListaAst(_,[]):- false.
+choque_Disp_ListaAst([_,Pxd,Pyd,Angulod,Velocidadd,Largod,DSeed],[[_,PxA,PyA,_,_,RadioA,_]|Cola]):-
+	chocan(Pxd, Pyd, 0, PxA, PyA, RadioA); 
+	choque_Ast_ListaAst([_,Pxd,Pyd,Angulod,Velocidadd,Largod,DSeed],Cola).
+
+%Verifica si un Nave choca con una lista de Asteroides.
+%[[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, _]
+choque_Nav_ListaAst(_,[]):- false.
+choque_Nav_ListaAst([_, PxN, PyN , _, _, _, _],[[_,Px2,Py2,_,_,Radio2,_]|Cola]):- 
+	chocan(PxN, PyN, 1, Px2, Py2, Radio2); 
+	choque_Ast_ListaAst([_,PxN,PyN,_,_,_,_],Cola).
 
 %Agregar un elemento a una lista.
 agregar(X,List,[X|List]).
@@ -416,7 +431,14 @@ agregar(X,List,[X|List]).
 removerElem(X, [X|Xs], Xs). 
 removerElem(X, [Y|Ys], [Y|Zs]):- removerElem(X, Ys, Zs).
 
+%Encontrar Asteroide que chocó con un disparo.   
+encontrarAsteroide([[_,_,_,_,_,_],Pxd,Pyd,Angulod,Velocidadd,Largod,DSeed],[[[N,M,A,P,L,Seed],PxA,PyA,_,_,RadioA,_]|Cola],AsteroideChocado):-
+	not(chocan(Pxd, Pyd, 0, PxA, PyA, RadioA)),
+	encontrarAsteroide([[N,M,A,P,L,Seed],Pxd,Pyd,Angulod,Velocidadd,Largod,DSeed],Cola,AsteroideChocado).
 
+encontrarAsteroide([[_,_,_,_,_,_],Pxd,Pyd,_,_,_,_],[[[N,M,A,P,L,Seed],PxA,PyA,AnguloA,VelocidadA,RadioA,SeedA]|_],AsteroideChocado):-
+	chocan(Pxd, Pyd, 0, PxA, PyA, RadioA),
+	AsteroideChocado = [[N,M,A,P,L,Seed],PxA,PyA,AnguloA,VelocidadA,RadioA,SeedA].
 
 %Algorimo que separa Aasteroides que Chocan y no Chocan.
 %Para los que chocan.
@@ -438,9 +460,80 @@ ch_Ast_Ast([CabR|ColaR],Original,Choca,NoChoca,Resultado):-
 ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
 	agregar(Choca,NoChoca,Resultado).
 
+%Algoritmo que separa Disparos que chocan de los que no Chocan, ademas de buscar los asteroides que chocan
+%con el/los disparos y ademas se eliminan. 
+
+ch_Disps_Asts([],[],[],[],Space,Resultado):- 
+	Resultado is Space.
+
+%Sin Disparos que choquen, Solo se guardan los Asteroides entrantes.
+ch_Disps_Asts([],Asteroides,[],[],Space,Resultado):-
+	mAstSpa(Space,Asteroides,NewSpace),
+	Resultado = NewSpace.
+
+%Sin Disparos (Previamente si habian) Esta relacion se guarda para ser el final de
+% la recursion. 
+ch_Disps_Asts([],Asteroides,_,DispNoChocan,Space,Resultado):-
+	length(Asteroides,CantidadAsteroides),
+	mVarASpa(Space,CantidadAsteroides,NewSpaceA),
+	mAstSpa(NewSpaceA,Asteroides,NewSpaceAst),
+	mDisSpa(NewSpaceAst,DispNoChocan,NewSpaceDisp),
+	Resultado = NewSpaceDisp.
+
+%Separar dos casos.
+%Caso Disparo a revisar Choca.
+ch_Disps_Asts([Disp|Cola],Asteroides,AstChocan,DispNoChocan,Space,Resultado):-
+	choque_Disp_ListaAst(Disp,Asteroides),
+	encontrarAsteroide(Disp,Asteroides,AsteroideChocado),
+	removerElem(AsteroideChocado,Asteroides,AsteroidesSinChocar),
+	agregar(AsteroideChocado,AstChocan,NewAstChocan),
+	ch_Disps_Asts(Cola,AsteroidesSinChocar,NewAstChocan,DispNoChocan,Space,Resultado).
+	
+%Caso Disparo a revisar No Choca.
+ch_Disps_Asts([Disp|Cola],Asteroides,AstChocan,DispNoChocan,Space,Resultado):-
+	not(choque_Disp_ListaAst(Disp,Asteroides)),
+	agregar(Disp,DispNoChocan,NewDispNoChocan),
+	ch_Disps_Asts(Cola,Asteroides,AstChocan,NewDispNoChocan,Space,Resultado).
 
 
+%Choque Nave con algun Asteroide en una lista de asteroides.
+%Choca y por lo tanto pierde.
+ch_Nave_Asts(Nave,Asteroides,Resultado):-
+	choque_Nav_ListaAst(Nave,Asteroides),
+	mEJNav(Nave,0,NuevaNave),
+	Resultado = NuevaNave.
+%Sigue Jugando.
+ch_Nave_Asts(Nave,Asteroides,Resultado):-
+	not(choque_Nav_ListaAst(Nave,Asteroides)),
+	mEJNav(Nave,2,NuevaNave),
+	Resultado = NuevaNave.
 
+%UpdateSpace(Space Seed).
+%mueve el tablero a un t+1 y verifica colisiones tanto de Asteroides-Disparos,
+%	Asteroides-Asteroides y Nave-Asteroides.
+updateSpace(Space,Resultado):-
+	%Obtener Nave,Asteroides y Disparos de Space
+	sNavSpa(Space,Nave),
+	sAstSpa(Space,Asteroides),
+	sDisSpa(Space,Disparos),
+	%Movemos todo a un t+1
+	moShip(Nave,NuevaNave),
+	maplist(movAst,Asteroides,NuevosAsteroides),
+	maplist(movDisp,Disparos,NuevosDisparos),
+	%Checkeo de Disparos-Asteroides
+	ch_Disps_Asts(NuevosDisparos,NuevosAsteroides,[],[],Space,SpaceChoqueDisp_Asts),
+	sAstSpa(SpaceChoqueDisp_Asts,AsteroidesChocadoconDisparos),
+	%Checkeo de Asteroides-Asteroides
+	ch_Ast_Ast(AsteroidesChocadoconDisparos,AsteroidesChocadoconDisparos,[],[],AsteroidesChocadosEntreSi),
+	%Checkeo de Nave con Asteroides
+	ch_Nave_Asts(NuevaNave,AsteroidesChocadosEntreSi,NaveFinal),
+	length(AsteroidesChocadosEntreSi,CantidadAsteroides),
+	%Dado que los disparos quedaron modificados en SpaceChoqueDisp_Asts, solo se procede a modificar 
+	%	Nave , Asteroides y la Variable A, que representa la cantidad de Asteroides.
+	mAstSpa(SpaceChoqueDisp_Asts,AsteroidesChocadosEntreSi,SpaceConNuevosAsteroides),
+	mNavSpa(SpaceConNuevosAsteroides,NaveFinal,SpaceconNuevaNave),
+	mVarASpa(SpaceconNuevaNave,CantidadAsteroides,FinalSpace),
+	Resultado = FinalSpace.
 
 
 
@@ -448,55 +541,12 @@ ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
 %Necesita:
 %			-ComparacionNave
 
-%moveAsteroide(Asteroide Angulo Velocidad).
-%Necesita Solo Selectores y Modificadoes
-%	tiene llamado Simplificado
-
-%moveDisparo(disparo angulo velocidad)
-%	tiene llamado Simplificado
 
 %Shoot (Space Constante)
 %Necesita:
 %		-ComparacionNave
 %		-UpdateSpace
 %		-Mover todos los disparos
-
-%ComparacionNave(listaAsteroides Nave radio)
-%Verifica que Nave choque con una lista de asteroides
-% Compara si intesectanave con asteroides en una lista de asteoides
-% Choque?
-
-%97 Verifica que disparo choque con asteroide
-%eliminar_disparo_lista (listaAsteroides disparo)
-%choque
-
-%Identifica_Asteroide (ListaAsteroides Disparo) (entrega Asteroide)
-%Choque?
-
-%ChoqueDisparos_Asteroides (Space Asteroides Disparos NuevosAsteroides disparosnochocados )
-%Entrega un Space Con coliciones hechas 
-% tiene llamado Simplificado
-
-%AsteroideChoca(asteroides asteroide)
-%Booleano
-
-%EliminaAsteroidequeChoca( asteroides asteroide)
-
-%ModificaTrayectoria(asteroides asteroide) asteroides que colicionan
-%Tiene llamado Simplificado
-
-%Choque
-%Entrega si choca o no.
-
-
-%UpdateSpace(Space Seed).
-%mueve el tablero a un t+1
-updateSpace(Space,[4|Space]).
-
-
-
-
-
 
 
 
@@ -832,3 +882,4 @@ fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],7,_,Res
 					[[N,M,NA,P,L,VarSeed],PxR6,PyR6,NewAngulo6,Velocidad,NewRadio,Seed],
 					[[N,M,NA,P,L,VarSeed],PxR7,PyR7,NewAngulo7,Velocidad,NewRadio,Seed]
 				].
+
