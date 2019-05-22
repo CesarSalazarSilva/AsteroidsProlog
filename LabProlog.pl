@@ -2,7 +2,6 @@
 %Space = [Variables,nave,asteroides,disparos]
 %createSpace(N,M,A,P,L,Seed,Space)
 
-
 %Space 5x10 (2, 4 y 5 asteroides)
 % 2 Asteroides
 %                                                [[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,Seed]
@@ -418,11 +417,14 @@ choque_Disp_ListaAst([_,Pxd,Pyd,Angulod,Velocidadd,Largod,DSeed],[[_,PxA,PyA,_,_
 	choque_Ast_ListaAst([_,Pxd,Pyd,Angulod,Velocidadd,Largod,DSeed],Cola).
 
 %Verifica si un Nave choca con una lista de Asteroides.
+%Ast [[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_]
+%Nav [[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, angulo]
+
 %[[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, _]
 choque_Nav_ListaAst(_,[]):- false.
-choque_Nav_ListaAst([_, PxN, PyN , _, _, _, _],[[_,Px2,Py2,_,_,Radio2,_]|Cola]):- 
-	chocan(PxN, PyN, 1, Px2, Py2, Radio2); 
-	choque_Ast_ListaAst([_,PxN,PyN,_,_,_,_],Cola).
+choque_Nav_ListaAst([_, Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo],[[_,Px2,Py2,_,_,Radio2,_]|Cola]):- 
+	chocan(Px, Py, 1, Px2, Py2, Radio2); 
+	choque_Ast_ListaAst([_, Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo],Cola).
 
 %Agregar un elemento a una lista.
 agregar(X,List,[X|List]).
@@ -457,6 +459,9 @@ ch_Ast_Ast([CabR|ColaR],Original,Choca,NoChoca,Resultado):-
 	ch_Ast_Ast(ColaR,Original,Choca,NewNoChoca,Resultado).
 
 %Caso Final lista Vacia.
+ch_Ast_Ast([],_,[],NoChoca,Resultado):-
+	Resultado = NoChoca.
+
 ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
 	agregar(Choca,NoChoca,Resultado).
 
@@ -464,7 +469,8 @@ ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
 %con el/los disparos y ademas se eliminan. 
 
 ch_Disps_Asts([],[],[],[],Space,Resultado):- 
-	Resultado is Space.
+	Resultado =
+	 Space.
 
 %Sin Disparos que choquen, Solo se guardan los Asteroides entrantes.
 ch_Disps_Asts([],Asteroides,[],[],Space,Resultado):-
@@ -498,6 +504,8 @@ ch_Disps_Asts([Disp|Cola],Asteroides,AstChocan,DispNoChocan,Space,Resultado):-
 
 %Choque Nave con algun Asteroide en una lista de asteroides.
 %Choca y por lo tanto pierde.
+%Ast [[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_]
+%Nav [[N,M,A,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, angulo]
 ch_Nave_Asts(Nave,Asteroides,Resultado):-
 	choque_Nav_ListaAst(Nave,Asteroides),
 	mEJNav(Nave,0,NuevaNave),
@@ -505,7 +513,7 @@ ch_Nave_Asts(Nave,Asteroides,Resultado):-
 %Sigue Jugando.
 ch_Nave_Asts(Nave,Asteroides,Resultado):-
 	not(choque_Nav_ListaAst(Nave,Asteroides)),
-	mEJNav(Nave,2,NuevaNave),
+	mEJNav(Nave,1,NuevaNave),
 	Resultado = NuevaNave.
 
 %UpdateSpace(Space Seed).
@@ -535,18 +543,41 @@ updateSpace(Space,Resultado):-
 	mVarASpa(SpaceconNuevaNave,CantidadAsteroides,FinalSpace),
 	Resultado = FinalSpace.
 
-
-
 %moveShip(Space angulo velocidad seed).
-%Necesita:
-%			-ComparacionNave
+moveShip(Space,Angulo,Speed,Seed,NewSpace):-
+	sNavSpa(Space,Nave),
+	% [[N,M,_,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo]
+	sAngNav(Nave,AnguloNave),
+	sVelNav(Nave,VelocidadNave),
+	NewAngulo is Angulo + AnguloNave,
+	NewVelocidad is Speed + VelocidadNave + 1,
+	mAngNav(Nave,NewAngulo,NaveAnguloModificado),
+	mVelNav(NaveAnguloModificado,NewVelocidad,NaveVelocidadModificada),
+	mSeedNav(NaveVelocidadModificada,Seed,NaveFinal),
+	%Agregamos la nave modificada
+	mNavSpa(Space,NaveFinal,SpaceNaveModificada),
+	updateSpace(SpaceNaveModificada,SpaceFinal),
+	NewSpace = SpaceFinal.
 
 
 %Shoot (Space Constante)
-%Necesita:
-%		-ComparacionNave
-%		-UpdateSpace
-%		-Mover todos los disparos
+shoot(Space,C,Seed,NewSpace):-
+	%Creo un disparo a partir de la nave de Space.
+	sNavSpa(Space,Nave),
+	sPxNav(Nave,Px),
+	sPyNav(Nave,Py),
+	sVelNav(Nave,Velocidad),
+	sAngNav(Nave,Angulo),
+	sVarLSpa(Nave,Largo),
+	sVarNav(Nave,Variables),
+	NewVelocidad is C + Velocidad,
+	NuevoDisparo = [Variables,Px,Py,Angulo,NewVelocidad,Largo,Seed],
+	sDisSpa(Space,Disparos),
+	agregar(NuevoDisparo,Disparos,NuevosDisparos),
+	mDisSpa(Space,NuevosDisparos,SpaceModificado),
+	updateSpace(SpaceModificado,SpaceFinal),
+	NewSpace = SpaceFinal.
+
 
 
 
@@ -882,4 +913,3 @@ fisicaDeAsteroides([[N,M,A,P,L,VarSeed],Px,Py,Angulo,Velocidad,Rad,Seed],7,_,Res
 					[[N,M,NA,P,L,VarSeed],PxR6,PyR6,NewAngulo6,Velocidad,NewRadio,Seed],
 					[[N,M,NA,P,L,VarSeed],PxR7,PyR7,NewAngulo7,Velocidad,NewRadio,Seed]
 				].
-
