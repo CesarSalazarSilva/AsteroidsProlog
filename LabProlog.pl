@@ -386,7 +386,9 @@ movDisp([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Largo,SeedD],DispModificado):-
 	RPx is mod(Rpx,M),
 	RPy is mod(Rpy,N),
 	NewLargo is Largo - Velocidad,
+	
 	DispModificado = [[N,M,A,P,L,Seed],RPx,RPy,Angulo,Velocidad,NewLargo,SeedD].
+
 
 %Caso Largo < 0
 movDisp([[_,_,_,_,_,_],_,_,_,_,Largo,_],DispModificado):-
@@ -475,6 +477,13 @@ ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
 	append(Choca,NoChoca,Resultado).
 
 %LLamado de fisicaDeAsteroides a una lista de Asteroides .
+apliFisicaAst([[[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,SeedA]|Cola],ResultadoProv,ResultadoFinal):-
+	fisicaDeAsteroides([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,SeedA],P,Radio,AstFisica),
+	append(AstFisica,ResultadoProv,NuevoResultado),
+	apliFisicaAst(Cola,NuevoResultado,ResultadoFinal).
+
+apliFisicaAst([],Resultado,ResultadoFinal):-
+	ResultadoFinal= Resultado.
 
 
 %Algoritmo que separa Disparos que chocan de los que no Chocan, ademas de buscar los asteroides que chocan
@@ -490,10 +499,12 @@ ch_Disps_Asts([],Asteroides,[],[],Space,Resultado):-
 
 %Sin Disparos (Previamente si habian) Esta relacion se guarda para ser el final de
 % la recursion. 
-ch_Disps_Asts([],Asteroides,_,DispNoChocan,Space,Resultado):-
-	length(Asteroides,CantidadAsteroides),
+ch_Disps_Asts([],Asteroides,AstChocan,DispNoChocan,Space,Resultado):-
+	apliFisicaAst(AstChocan,[],NuevosAstChocan),
+	append(Asteroides,NuevosAstChocan,AsteroidesLuegoDeColision),
+	length(AsteroidesLuegoDeColision,CantidadAsteroides),
 	mVarASpa(Space,CantidadAsteroides,NewSpaceA),
-	mAstSpa(NewSpaceA,Asteroides,NewSpaceAst),
+	mAstSpa(NewSpaceA,AsteroidesLuegoDeColision,NewSpaceAst),
 	mDisSpa(NewSpaceAst,DispNoChocan,NewSpaceDisp),
 	Resultado = NewSpaceDisp.
 
@@ -581,7 +592,6 @@ moveShip(Space,Angulo,Speed,Seed,NewSpace):-
 	updateSpace(SpaceNaveModificada,SpaceFinal),
 	NewSpace = SpaceFinal.
 
-
 %Shoot (Space Constante)
 shoot(Space,C,Seed,NewSpace):-
 	%Creo un disparo a partir de la nave de Space.
@@ -599,9 +609,6 @@ shoot(Space,C,Seed,NewSpace):-
 	mDisSpa(Space,NuevosDisparos,SpaceModificado),
 	updateSpace(SpaceModificado,SpaceFinal),
 	NewSpace = SpaceFinal.
-
-
-
 
 %Relacion Fisica de Asteroides.
 %fisicaDeAsteroides(Asteroide,ValorRandom,Tamano,Asteroides)
