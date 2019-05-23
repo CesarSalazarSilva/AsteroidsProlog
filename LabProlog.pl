@@ -342,6 +342,11 @@ elim_elem(_, [], []).
 elim_elem(Y, [Y|Xs], Zs):- elim_elem(Y, Xs, Zs), !. 
 elim_elem(X, [Y|Xs], [Y|Zs]):- elim_elem(X, Xs, Zs).
 
+%Elimina Todos los X Presentes.
+elim_todos_elem(_, [], []). 
+elim_todos_elem(Y, [Y|Xs], Zs):- elim_elem(Y, Xs, Zs). 
+elim_todos_elem(X, [Y|Xs], [Y|Zs]):- elim_elem(X, Xs, Zs).
+
 
 %Funcion Map.
 %Funciona con maplist(mapeo,list,Resultado)
@@ -349,6 +354,10 @@ mapeo(Dato,DatoMapeado):- DatoMapeado is Dato + 1.
 
 
 %Mover Asteroides.
+movAst([_,_,_,_,_,Radio,_],AstModificado):- 
+	Radio =< 0,
+	AstModificado = 0.
+
 movAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,SeedA],AstModificado):- 
 	grad_Rad(Angulo,AngGrad),
 	Npx is Px + Velocidad*cos(AngGrad),
@@ -463,14 +472,16 @@ ch_Ast_Ast([],_,[],NoChoca,Resultado):-
 	Resultado = NoChoca.
 
 ch_Ast_Ast([],_,Choca,NoChoca,Resultado):-
-	agregar(Choca,NoChoca,Resultado).
+	append(Choca,NoChoca,Resultado).
+
+%LLamado de fisicaDeAsteroides a una lista de Asteroides .
+
 
 %Algoritmo que separa Disparos que chocan de los que no Chocan, ademas de buscar los asteroides que chocan
 %con el/los disparos y ademas se eliminan. 
 
 ch_Disps_Asts([],[],[],[],Space,Resultado):- 
-	Resultado =
-	 Space.
+	Resultado = Space.
 
 %Sin Disparos que choquen, Solo se guardan los Asteroides entrantes.
 ch_Disps_Asts([],Asteroides,[],[],Space,Resultado):-
@@ -535,12 +546,23 @@ updateSpace(Space,Resultado):-
 	ch_Ast_Ast(AsteroidesChocadoconDisparos,AsteroidesChocadoconDisparos,[],[],AsteroidesChocadosEntreSi),
 	%Checkeo de Nave con Asteroides
 	ch_Nave_Asts(NuevaNave,AsteroidesChocadosEntreSi,NaveFinal),
-	length(AsteroidesChocadosEntreSi,CantidadAsteroides),
+	
 	%Dado que los disparos quedaron modificados en SpaceChoqueDisp_Asts, solo se procede a modificar 
 	%	Nave , Asteroides y la Variable A, que representa la cantidad de Asteroides.
-	mAstSpa(SpaceChoqueDisp_Asts,AsteroidesChocadosEntreSi,SpaceConNuevosAsteroides),
+
+	%Se eliminan los ceros de la lista de Asteroides y Disparos 
+	sDisSpa(SpaceChoqueDisp_Asts,DisparosVerificados),
+	elim_todos_elem(0,AsteroidesChocadosEntreSi,NewAsteroidesChocadosEntreSi),
+	elim_todos_elem(0,DisparosVerificados,NewDisparosVerificados),
+	length(NewAsteroidesChocadosEntreSi,CantidadAsteroides),
+
+
+
+	mAstSpa(SpaceChoqueDisp_Asts,NewAsteroidesChocadosEntreSi,SpaceConNuevosAsteroides),
 	mNavSpa(SpaceConNuevosAsteroides,NaveFinal,SpaceconNuevaNave),
-	mVarASpa(SpaceconNuevaNave,CantidadAsteroides,FinalSpace),
+	mVarASpa(SpaceconNuevaNave,CantidadAsteroides,SemiFinalSpace),
+	mDisSpa(SemiFinalSpace,NewDisparosVerificados,FinalSpace),
+
 	Resultado = FinalSpace.
 
 %moveShip(Space angulo velocidad seed).
