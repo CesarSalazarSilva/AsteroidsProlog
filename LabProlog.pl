@@ -590,7 +590,32 @@ moveShip(Space,Angulo,Speed,Seed,NewSpace):-
 	%Agregamos la nave modificada
 	mNavSpa(Space,NaveFinal,SpaceNaveModificada),
 	updateSpace(SpaceNaveModificada,SpaceFinal),
+	sAstSpa(SpaceFinal,AsteroidesFinales),
+	length(AsteroidesFinales,LargoAstFinal),
+	LargoAstFinal>0,
 	NewSpace = SpaceFinal.
+
+moveShip(Space,Angulo,Speed,Seed,NewSpace):-
+	sNavSpa(Space,Nave),
+	% [[N,M,_,P,L,Seed], Px, Py , Velocidad, SeedN, EstadodeJuego, Angulo]
+	sAngNav(Nave,AnguloNave),
+	sVelNav(Nave,VelocidadNave),
+	NewAngulo is Angulo + AnguloNave,
+	NewVelocidad is Speed + VelocidadNave + 1,
+	mAngNav(Nave,NewAngulo,NaveAnguloModificado),
+	mVelNav(NaveAnguloModificado,NewVelocidad,NaveVelocidadModificada),
+	mSeedNav(NaveVelocidadModificada,Seed,NaveFinal),
+	%Agregamos la nave modificada
+	mNavSpa(Space,NaveFinal,SpaceNaveModificada),
+	updateSpace(SpaceNaveModificada,SpaceFinal),
+	sAstSpa(SpaceFinal,AsteroidesFinales),
+	length(AsteroidesFinales,LargoAstFinal),
+	LargoAstFinal == 0,
+	%Significa que Ganó.
+	sNavSpa(SpaceFinal,NaveDeSpaceFinal),
+	mEJNav(NaveDeSpaceFinal,2,NaveGana),
+	mNavSpa(SpaceFinal,NaveGana,SpaceNaveGana),
+	NewSpace = SpaceNaveGana.
 
 %Shoot (Space Constante)
 shoot(Space,C,Seed,NewSpace):-
@@ -709,6 +734,14 @@ recursionNave(Matriz,Nave,Resultado):-
 	insertM(Radio,NPx,NPy,Matriz,[],NuevaMatriz),
 	Resultado = NuevaMatriz.
 
+convertirMatizString([Car|Cola],Prov,String):-
+	atomic_list_concat(Car, ',', Atom),atom_string(Atom, StringP),
+	string_concat(StringP,",\n,",F),
+	string_concat(Prov,F,Res),
+	convertirMatizString(Cola,Res,String).
+
+convertirMatizString([],Prov,String):-
+	String = Prov.
 
 space2String(Space,SpaceStr):-
 	%Creamos una Matriz Vacia de NxM
@@ -724,14 +757,8 @@ space2String(Space,SpaceStr):-
 	recursionAst(MNave,Asteroides,MAste),
 	%Agregamos Los Disparos.
 	recursionDis(MAste,Disparos,MFinal),
-	SpaceStr = MFinal.
-
-	%Transformamos La Matriz en un String Para el Usuario.
-
-
-
-
-
+	convertirMatizString(MFinal,"",MatrizaString),
+	SpaceStr = MatrizaString.
 
 
 
