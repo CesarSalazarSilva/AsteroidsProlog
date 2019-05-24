@@ -246,32 +246,32 @@ mSeedAst([[N,M,A,P,L,Seed],Px,Py,Angulo,Velocidad,Radio,_], NewSeed,[[N,M,A,P,L,
 %SELECTOR DISPARO
 
 %Selector Variables
-sVarDis([Variables,_,_,_,_,_,_,_,_],Variables).
+sVarDis([Variables,_,_,_,_,_,_],Variables).
 %Selector Variable N Disparo
-sVarNDis([[N,_,_,_,_,_],_,_,_,_,_,_,_,_],N).
+sVarNDis([[N,_,_,_,_,_],_,_,_,_,_,_],N).
 %Selector Variables M Disparo
-sVarMDis([[_,M,_,_,_,_],_,_,_,_,_,_,_,_],M).
+sVarMDis([[_,M,_,_,_,_],_,_,_,_,_,_],M).
 %Selector Variables A Disparo
-sVarADis([[_,_,A,_,_,_],_,_,_,_,_,_,_,_],A).
+sVarADis([[_,_,A,_,_,_],_,_,_,_,_,_],A).
 %Selector Variables P Disparo
-sVarPDis([[_,_,_,P,_,_],_,_,_,_,_,_,_,_],P).
+sVarPDis([[_,_,_,P,_,_],_,_,_,_,_,_],P).
 %Selector Variables L Disparo
-sVarLDis([[_,_,_,_,L,_],_,_,_,_,_,_,_,_],L).
+sVarLDis([[_,_,_,_,L,_],_,_,_,_,_,_],L).
 %Selector Variables Seed Disparo
-sVarSeedDis([[_,_,_,_,_,Seed],_,_,_,_,_,_,_,_],Seed).
+sVarSeedDis([[_,_,_,_,_,Seed],_,_,_,_,_,_],Seed).
 
 %Selector Px Disparo
-sPxDis([_,Px,_,_,_,_,_,_,_],Px).
+sPxDis([_,Px,_,_,_,_,_],Px).
 %Selector Py Disparo
-sPyDis([_,_,Py,_,_,_,_,_,_],Py).
+sPyDis([_,_,Py,_,_,_,_],Py).
 %Selector Angulo Disparo
-sAngDis([_,_,_,Angulo,_,_,_,_,_],Angulo).
+sAngDis([_,_,_,Angulo,_,_,_],Angulo).
 %Selector Velocidad Disparo
-sVelDis([_,_,_,_,Velocidad,_,_,_,_],Velocidad).
+sVelDis([_,_,_,_,Velocidad,_,_],Velocidad).
 %Selector Largo Disparo
-sLarDis([_,_,_,_,_,_,_,Largo,_],Largo).
+sLarDis([_,_,_,_,_,Largo,_],Largo).
 %Selector Seed Disparo
-sSeedDis([_,_,_,_,_,_,_,_,Seed],Seed).
+sSeedDis([_,_,_,_,_,_,Seed],Seed).
 
 %MODIFICADORES DISPARO
 %Modifica A Disparo
@@ -609,6 +609,131 @@ shoot(Space,C,Seed,NewSpace):-
 	mDisSpa(Space,NuevosDisparos,SpaceModificado),
 	updateSpace(SpaceModificado,SpaceFinal),
 	NewSpace = SpaceFinal.
+
+%Space2String
+
+crearXColumnas(X,Provisorio,ResultadoFinal):-
+	length(Provisorio,LargoProv),
+	X>LargoProv,
+	append([0],Provisorio,Resultado),
+	crearXColumnas(X,Resultado,ResultadoFinal).
+
+crearXColumnas(X,Provisorio,ResultadoFinal):-
+	length(Provisorio,LargoProv),
+	X == LargoProv,
+	ResultadoFinal = Provisorio.
+
+
+crearYFilas(X,Y,Provisorio,ResultadoFinal):-
+	length(Provisorio,LargoProv),
+	Y>LargoProv,
+	crearXColumnas(X,[],Columnas),
+	append([Columnas],Provisorio,Resultado),
+	crearYFilas(X,Y,Resultado,ResultadoFinal).
+
+crearYFilas(_,Y,Provisorio,ResultadoFinal):-
+	length(Provisorio,LargoProv),
+	Y == LargoProv,
+	ResultadoFinal = Provisorio.
+
+%Selecciona Elemento N de la forma : sElmN([2,1,2,3],3,X) : X = 2.
+sElmN([Y|_], 1, Y).
+sElmN([_|Xs], N, Y):-
+          N2 is N - 1,
+          sElmN(Xs, N2, Y).
+
+sXY(Matriz,X,Y,Resultado):-
+	sElmN(Matriz,Y,Fila),
+	sElmN(Fila,X,Elemento),
+	Resultado is Elemento.
+
+insFinal([], E, [E]).
+insFinal([Cabeza|Resto], Elemento, [Cabeza|Lista]):-
+	insFinal(Resto, Elemento, Lista).
+
+%insert(99,3,[1,2,3,4,5,6,7,8,9],R). : [1, 2, 99, 3, 4, 5, 6, 7, 8 9] 
+
+insert(X,1,[_|R],Prov,Resultado):-
+	insFinal(Prov,X,NewProv),
+	append(NewProv,R,Lista),
+	Resultado = Lista. 
+
+insert(X,Pos,[C|R],Prov,Resultado):- 
+	Pos1 is Pos-1,
+	insFinal(Prov,C,NewProv),
+	insert(X,Pos1,R,NewProv,Resultado). 
+
+insertM(X,PosX,1,[C|R],ResultadoProv,Resultado):-
+	insert(X,PosX,C,[],NuevaFila),
+	display(NuevaFila),
+	insFinal(ResultadoProv,NuevaFila,NewResultadoProv),
+	append(NewResultadoProv,R,Lista),
+	Resultado = Lista.
+
+insertM(X,PosX,PosY,[C|R],ResultadoProv,Resultado):-
+	PosY>1,
+	PosY1 is PosY-1,
+	insFinal(ResultadoProv,C,NewResultadoProv),
+	insertM(X,PosX,PosY1,R,NewResultadoProv,Resultado).
+
+recursionAst(Matriz,[Car|Cola],Resultado):-
+	sPxAst(Car,Px),
+	NPx is Px+1,
+	sPyAst(Car,Py),
+	NPy is Py+1,
+	sRadAst(Car,Radio),
+	insertM(Radio,NPx,NPy,Matriz,[],NuevaMatriz),
+	recursionAst(NuevaMatriz,Cola,Resultado).
+
+recursionAst(Matriz,[],Resultado):- 
+	Resultado = Matriz.
+
+recursionDis(Matriz,[Car|Cola],Resultado):-
+	sPxDis(Car,Px),
+	NPx is Px+1,
+	sPyDis(Car,Py),
+	NPy is Py+1,
+	Radio is "D",
+	insertM(Radio,NPx,NPy,Matriz,[],NuevaMatriz),
+	recursionDis(NuevaMatriz,Cola,Resultado).
+
+recursionDis(Matriz,[],Resultado):- 
+	Resultado = Matriz.
+
+recursionNave(Matriz,Nave,Resultado):-
+	sPxNav(Nave,Px),
+	sPyNav(Nave,Py),
+	NPx is Px +1,
+	NPy is Py +1,
+	Radio is "A",
+	insertM(Radio,NPx,NPy,Matriz,[],NuevaMatriz),
+	Resultado = NuevaMatriz.
+
+
+space2String(Space,SpaceStr):-
+	%Creamos una Matriz Vacia de NxM
+	sVarMSpa(Space,X),
+	sVarNSpa(Space,Y),
+	sNavSpa(Space,Nave),
+	sAstSpa(Space,Asteroides),
+	sDisSpa(Space,Disparos),
+	crearYFilas(X,Y,[],Matriz),
+	%Agregamos La Nave.
+	recursionNave(Matriz,Nave,MNave),
+	%Agregamos Los Asteroides.
+	recursionAst(MNave,Asteroides,MAste),
+	%Agregamos Los Disparos.
+	recursionDis(MAste,Disparos,MFinal),
+	SpaceStr = MFinal.
+
+	%Transformamos La Matriz en un String Para el Usuario.
+
+
+
+
+
+
+
 
 %Relacion Fisica de Asteroides.
 %fisicaDeAsteroides(Asteroide,ValorRandom,Tamano,Asteroides)
